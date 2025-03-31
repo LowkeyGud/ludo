@@ -1,8 +1,20 @@
 import React from 'react';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 import Navigation from './src/navigation/Navigation';
+import {persistor, store} from './src/redux/store';
 
 const App = () => {
-  return <Navigation />;
+  return (
+    <Provider store={store}>
+      <PersistGate
+        loading={null}
+        persistor={persistor}
+        onBeforeLift={() => console.log('State rehydrated:', store.getState())}>
+        <Navigation />
+      </PersistGate>
+    </Provider>
+  );
 };
 
 export default App;

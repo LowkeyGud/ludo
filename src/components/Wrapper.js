@@ -12,8 +12,8 @@ const Wrapper = ({children, style}) => {
       style={StyleSheet.container}>
       <BlurView
         style={styles.blurView}
-        blurType="light" // Options: 'light', 'dark', 'xlight', etc.
-        blurAmount={10} // Adjust blur intensity (0-100, default is 10)
+        blurType="dark" // Options: 'light', 'dark', 'xlight', etc.
+        blurAmount={1} // Adjust blur intensity (0-100, default is 10)
       />
       <SafeAreaView style={[styles.safeAreaView, style]}>
         {children}

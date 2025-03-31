@@ -2,21 +2,39 @@ import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {RFValue} from 'react-native-responsive-fontsize';
-const color = '#d5be3e';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const iconsSize = RFValue();
-const GradientButton = ({title, onPress, iconColor = color}) => {
+const COLOR = '#fff';
+
+const iconsSize = RFValue(20); // Adjusted icon size for better visibility
+const GradientButton = ({title, onPress, iconColor = COLOR}) => {
   return (
-    <View style={StyleSheet.mainContainer}>
+    <View style={styles.mainContainer}>
       <TouchableOpacity
         style={styles.btnContainer}
-        onPress={onPress}
+        onPress={() => {
+          playSound('ui');
+          onPress();
+        }}
         activeOpacity={0.8}>
         <LinearGradient
           colors={['#2ecc71', '#e67e22']} // Greenish to orange gradient
           start={{x: 0, y: 0}} // Left to right gradient
           end={{x: 1, y: 0}}
           style={styles.gradient}>
+          {title === 'RESUME' ? (
+            <MaterialCommunityIcons
+              name="play-circle-outline"
+              size={iconsSize}
+              color={iconColor}
+            />
+          ) : (
+            <MaterialCommunityIcons
+              name="play"
+              size={iconsSize}
+              color={iconColor}
+            />
+          )}
           <Text style={styles.buttonText}>{title}</Text>
         </LinearGradient>
       </TouchableOpacity>
@@ -25,6 +43,7 @@ const GradientButton = ({title, onPress, iconColor = color}) => {
 };
 
 import {StyleSheet} from 'react-native';
+import {playSound} from '../helpers/SoundUtility';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -38,10 +57,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 5,
     backgroundColor: 'white',
-    shadowColor: color,
+    shadowColor: COLOR,
     shadowOpacity: 0.5,
     shadowRadius: 1,
-    borderColor: color,
+    borderColor: COLOR,
     width: 220,
   },
   gradient: {
@@ -53,6 +72,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3, // Android shadow
+    flexDirection: 'row',
+    gap: 10, // Space between icon and text
+    alignItems: 'center', // Center icon and text vertically
+    justifyContent: 'center', // Center content horizontally
   },
   buttonText: {
     textAlign: 'center',
