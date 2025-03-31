@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">ludo</string>
+<!-- App name in android -->
+<!-- Native-Changes-LKG -->
+    <string name="app_name">Ludo LKG</string>
 </resources>

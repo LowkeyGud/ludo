@@ -4,6 +4,13 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
+Search using Global Finder for **Native-Changes-LKG** to find all the native changes and change the app-icons from res(android) or xcode(ios).
+
+For IOS:
+
+Add pod install script inside package.json: "pod install" : "cd ios && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install"
+This generates a Podfile.lock and installs iOS-specific dependencies in the ios/Pods/ directory.
+
 ## Step 1: Start Metro
 
 First, you will need to run **Metro**, the JavaScript build tool for React Native.
