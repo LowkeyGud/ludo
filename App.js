@@ -7,10 +7,7 @@ import {persistor, store} from './src/redux/store';
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate
-        loading={null}
-        persistor={persistor}
-        onBeforeLift={() => console.log('State rehydrated:', store.getState())}>
+      <PersistGate loading={null} persistor={persistor}>
         <Navigation />
       </PersistGate>
     </Provider>

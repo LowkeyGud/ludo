@@ -5,6 +5,4 @@ const rootReducer = combineReducers({
   game: gameSlice,
 });
 
-console.log(rootReducer);
-
 export default rootReducer;

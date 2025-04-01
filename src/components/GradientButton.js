@@ -16,12 +16,14 @@ const GradientButton = ({title, onPress, iconColor = COLOR}) => {
           playSound('ui');
           onPress();
         }}
-        activeOpacity={0.8}>
+        activeOpacity={0.8}
+        testID="gradient-button">
         <LinearGradient
           colors={['#2ecc71', '#e67e22']} // Greenish to orange gradient
           start={{x: 0, y: 0}} // Left to right gradient
           end={{x: 1, y: 0}}
-          style={styles.gradient}>
+          style={styles.gradient}
+          testID="gradient-container">
           {title === 'RESUME' ? (
             <MaterialCommunityIcons
               name="play-circle-outline"

@@ -1,8 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {initialState} from './initialState';
 
-console.log('Imported initialState:', initialState); // Debug
-
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
