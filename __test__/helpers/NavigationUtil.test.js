@@ -31,6 +31,10 @@ describe('Navigation functions', () => {
     jest.clearAllMocks(); // Reset mock calls between tests
   });
 
+  afterAll(() => {
+    jest.resetAllMocks(); // Reset all mocks after all tests
+  });
+
   it('should navigate to a route', async () => {
     const routeName = 'TestRoute';
     const params = {key: 'value'};

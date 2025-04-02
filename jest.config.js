@@ -13,7 +13,9 @@ module.exports = {
   collectCoverage: true,
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '\\.(png|jpg|jpeg|gif|svg)$': '<rootDir>/__mocks__/fileMock.tsx',
+    '\\.(png|jpg|jpeg|gif|svg)$': '<rootDir>/__mocks__/imageMock.tsx',
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(mp3|wav)$': '<rootDir>/__mocks__/soundMock.tsx',
     'react-native-responsive-fontsize':
       '<rootDir>/__mocks__/react-native-responsive-fontsize.tsx',
     'react-native-sound-player':

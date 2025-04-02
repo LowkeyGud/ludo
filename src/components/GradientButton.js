@@ -29,12 +29,14 @@ const GradientButton = ({title, onPress, iconColor = COLOR}) => {
               name="play-circle-outline"
               size={iconsSize}
               color={iconColor}
+              accessibilityLabel="Resume Button"
             />
           ) : (
             <MaterialCommunityIcons
               name="play"
               size={iconsSize}
               color={iconColor}
+              accessibilityLabel="Play Button"
             />
           )}
           <Text style={styles.buttonText}>{title}</Text>

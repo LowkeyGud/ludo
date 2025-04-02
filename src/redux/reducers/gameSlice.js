@@ -3,7 +3,7 @@ import {initialState} from './initialState';
 
 export const gameSlice = createSlice({
   name: 'game',
-  initialState,
+  initialState: initialState,
   reducers: {
     resetGame: () => initialState,
   },

@@ -11,12 +11,13 @@ import Wrapper from '../components/Wrapper';
 import {deviceHeight, deviceWidth} from '../constants/Scaling';
 import {navigate} from '../helpers/NavigationUtil';
 import {playSound} from '../helpers/SoundUtility';
-import {selectCurrentPositions} from '../redux/reducers/gameSelectore';
+import {selectCurrentPositions} from '../redux/reducers/gameSelector';
 import {resetGame} from '../redux/reducers/gameSlice';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const currentPositions = useSelector(selectCurrentPositions);
+  console.log('This is from homescreen: ');
 
   const witchAnim = useRef(new Animated.Value(-deviceHeight)).current;
   const scaleAnim = useRef(new Animated.Value(-1)).current;
@@ -102,14 +103,12 @@ const HomeScreen = () => {
 
   const startNewGame = async (isNewGame = false) => {
     SoundPlayer.stop();
-    console.log('Pressed');
 
     if (isNewGame) {
       dispatch(resetGame());
     }
     navigate('LudoBoardScreen');
     playSound('game_start');
-    console.log('done');
   };
 
   const handleNewGamePress = useCallback(() => {

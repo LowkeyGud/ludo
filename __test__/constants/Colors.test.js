@@ -26,8 +26,8 @@ describe('Colors', () => {
     const colorKeys = Object.keys(Colors);
     expect(colorKeys).toHaveLength(5);
     expect(colorKeys).toEqual([
-      'green',
       'red',
+      'green',
       'yellow',
       'blue',
       'borderColor',

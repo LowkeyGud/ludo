@@ -9,13 +9,14 @@ const Wrapper = ({children, style}) => {
     <ImageBackground
       source={BG}
       resizeMode="cover"
-      style={StyleSheet.container}>
+      style={StyleSheet.container}
+      accessibilityLabel="Blur image background">
       <BlurView
         style={styles.blurView}
         blurType="dark" // Options: 'light', 'dark', 'xlight', etc.
         blurAmount={1} // Adjust blur intensity (0-100, default is 10)
       />
-      <SafeAreaView style={[styles.safeAreaView, style]}>
+      <SafeAreaView testID="safe-area" style={[styles.safeAreaView, style]}>
         {children}
       </SafeAreaView>
     </ImageBackground>

@@ -1,5 +1,4 @@
 import '@testing-library/react-native';
-jest.mock('react-native/Libraries/Animated/AnimatedMock');
 // include this line for mocking react-native-gesture-handler
 import 'react-native-gesture-handler/jestSetup';
 
