@@ -16,6 +16,8 @@ module.exports = {
     '\\.(png|jpg|jpeg|gif|svg)$': '<rootDir>/__mocks__/imageMock.tsx',
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(mp3|wav)$': '<rootDir>/__mocks__/soundMock.tsx',
+    // '^@/(.*)$': '<rootDir>/src/$1',
+    // '\\.json$': '<rootDir>/__mocks__/lottieMock.tsx',
     'react-native-responsive-fontsize':
       '<rootDir>/__mocks__/react-native-responsive-fontsize.tsx',
     'react-native-sound-player':

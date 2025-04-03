@@ -42,7 +42,7 @@ const SplashScreen = () => {
   return (
     <Wrapper>
       <Animated.View style={{transform: [{scale}]}}>
-        <Image source={Logo} style={styles.imgContainer} />
+        <Image testID="logo-image" source={Logo} style={styles.imgContainer} />
       </Animated.View>
     </Wrapper>
   );

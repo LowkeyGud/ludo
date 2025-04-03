@@ -17,12 +17,12 @@ import {resetGame} from '../redux/reducers/gameSlice';
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const currentPositions = useSelector(selectCurrentPositions);
-  console.log('This is from homescreen: ');
 
   const witchAnim = useRef(new Animated.Value(-deviceHeight)).current;
   const scaleAnim = useRef(new Animated.Value(-1)).current;
   const isFocused = useIsFocused();
 
+  console.log('This is from homescreen: ');
   useEffect(() => {
     const loopAnimation = () => {
       Animated.loop(
@@ -121,7 +121,7 @@ const HomeScreen = () => {
   return (
     <Wrapper style={styles.mainContainer}>
       <View style={styles.imgContainer}>
-        <Image source={Logo} style={styles.img} />
+        <Image accessibilityLabel="Logo" source={Logo} style={styles.img} />
       </View>
       {/* Ensure conditional rendering works */}
       {!!currentPositions && renderButton('RESUME', handleResumePress)}
@@ -143,6 +143,7 @@ const HomeScreen = () => {
             autoPlay
             speed={1}
             style={styles.witch}
+            testID="witch"
           />
         </Pressable>
       </Animated.View>
