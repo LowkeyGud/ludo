@@ -1,4 +1,3 @@
-import {BlurView} from '@react-native-community/blur';
 import React from 'react';
 import {ImageBackground, SafeAreaView, StyleSheet} from 'react-native';
 import BG from '../assets/images/bg.jpeg';
@@ -9,13 +8,13 @@ const Wrapper = ({children, style}) => {
     <ImageBackground
       source={BG}
       resizeMode="cover"
-      style={StyleSheet.container}
+      style={styles.container}
       accessibilityLabel="Blur image background">
-      <BlurView
+      {/* <BlurView
         style={styles.blurView}
         blurType="dark" // Options: 'light', 'dark', 'xlight', etc.
-        blurAmount={1} // Adjust blur intensity (0-100, default is 10)
-      />
+        blurAmount={10} // Adjust blur intensity (0-100, default is 10)
+      /> */}
       <SafeAreaView testID="safe-area" style={[styles.safeAreaView, style]}>
         {children}
       </SafeAreaView>
@@ -29,14 +28,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  blurView: {
+    ...StyleSheet.absoluteFill, // Cover the entire screen
+  },
   safeAreaView: {
     height: deviceHeight,
     width: deviceWidth,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  blurView: {
-    ...StyleSheet.absoluteFill, // Cover the entire screen
   },
 });
 export default Wrapper;
