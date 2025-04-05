@@ -15,7 +15,7 @@ const SIZE = 300;
 const PlayerPieces = memo(({player, style, pieceColor, translate}) => {
   return (
     <View style={[styles.mainContainer, style]}>
-      {player.map((piece, idx) => {
+      {player.map((piece, index) => {
         return (
           <View
             pointerEvents={'none'}
@@ -25,7 +25,12 @@ const PlayerPieces = memo(({player, style, pieceColor, translate}) => {
               zIndex: 99,
               position: 'absolute',
               bottom: 0,
-              transform: [{scale: 0.5}, {[translate]: 14 * idx}],
+              transform: [
+                {scale: 0.5},
+                translate === 'translateX'
+                  ? {translateX: 14 * index}
+                  : {translateY: 14 * index},
+              ],
             }}>
             <Pile
               cell={true}
@@ -89,13 +94,13 @@ const FourTriangle = ({player1, player2, player3, player4}) => {
         translate: 'translateY',
       },
       {
-        player: player3,
+        player: player4,
         top: 20,
         left: -2,
         right: 0,
         bottom: 0,
         pieceColor: Colors.blue,
-        translate: 'translateX',
+        translate: 'translateY',
       },
     ],
     [player1, player2, player3, player4],
@@ -112,6 +117,7 @@ const FourTriangle = ({player1, player2, player3, player4}) => {
             bottom: data.bottom,
             left: data.left,
             right: data.right,
+            zIndex: 100,
           }}
           pieceColor={data.pieceColor}
           translate={data.pieceColor}

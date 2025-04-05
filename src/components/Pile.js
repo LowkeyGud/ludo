@@ -70,7 +70,7 @@ const Pile = ({color, player, cell, pieceId, onPress}) => {
       <View
         style={[
           styles.hollowCircle,
-          {borderColor: cell ? Colors.transparent : Colors.black},
+          {borderColor: cell ? 'transparent' : Colors.borderColor},
         ]}>
         {(cell ? isCellEnabled && isForwardable() : isPileEnabled) && (
           <View style={styles.dashedCircleContainer}>
@@ -120,14 +120,14 @@ const styles = StyleSheet.create({
     height: 32,
     position: 'absolute',
     top: -20,
-    zIndex: 100000000,
   },
   hollowCircle: {
     position: 'absolute',
     width: 15,
     height: 15,
     borderRadius: 25,
-    borderWidth: 2,
+    borderWidth: 1,
+    borderColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     flexDirection: 'row',
+    backgroundColor: 'white',
   },
   cellContainer: {
     flexDirection: 'row',

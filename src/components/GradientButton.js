@@ -24,7 +24,14 @@ const GradientButton = ({title, onPress, iconColor = COLOR}) => {
           end={{x: 1, y: 0}}
           style={styles.gradient}
           testID="gradient-container">
-          {title === 'RESUME' ? (
+          {title === 'HOME' ? (
+            <MaterialCommunityIcons
+              name="home-outline"
+              size={iconsSize}
+              color={iconColor}
+              accessibilityLabel="Home Button"
+            />
+          ) : title === 'RESUME' ? (
             <MaterialCommunityIcons
               name="play-circle-outline"
               size={iconsSize}

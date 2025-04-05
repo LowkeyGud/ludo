@@ -3,6 +3,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import IonIcons from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
+import Start from '../assets/images/start.png';
 import Dice from '../components/Dice';
 import FourTriangle from '../components/FourTriangle';
 import HorizontalPath from '../components/HorizontalPath';
@@ -30,7 +31,6 @@ const LudoBoardScreen = () => {
   const player4 = useSelector(selectPlayer4);
   const isDiceTouch = useSelector(selectDiceTouch);
   const winner = useSelector(state => state.game.winner);
-  useSelector(state => console.log(state.game)); // Debugging line to check the state
 
   const isFocused = useIsFocused();
   const opacity = useRef(new Animated.Value(0)).current;
@@ -120,6 +120,7 @@ const LudoBoardScreen = () => {
 
       {showStartImage && (
         <Animated.Image
+          source={Start}
           style={{
             width: deviceWidth * 0.5,
             height: deviceWidth * 0.2,

@@ -2,7 +2,6 @@ import {useIsFocused} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import React, {useCallback, useEffect, useRef} from 'react';
 import {Animated, Image, Pressable, StyleSheet, View} from 'react-native';
-import SoundPlayer from 'react-native-sound-player';
 import {useDispatch, useSelector} from 'react-redux';
 import Witch from '../assets/animation/witch.json';
 import Logo from '../assets/images/logo.png';
@@ -102,7 +101,7 @@ const HomeScreen = () => {
   ));
 
   const startNewGame = async (isNewGame = false) => {
-    SoundPlayer.stop();
+    // SoundPlayer.stop();
 
     if (isNewGame) {
       dispatch(resetGame());
@@ -124,7 +123,7 @@ const HomeScreen = () => {
         <Image accessibilityLabel="Logo" source={Logo} style={styles.img} />
       </View>
       {/* Ensure conditional rendering works */}
-      {!!currentPositions && renderButton('RESUME', handleResumePress)}
+      {currentPositions.length > 0 && renderButton('RESUME', handleResumePress)}
       {renderButton('Start New Game', handleNewGamePress)}
 
       <Animated.View

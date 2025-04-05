@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {LinearGradient} from 'react-native-linear-gradient';
 import {useDispatch, useSelector} from 'react-redux';
 import Diceroll from '../assets/animation/diceroll.json';
 import Arrow from '../assets/images/arrow.png';
@@ -28,7 +27,6 @@ import {
 
 const Dice = ({color, rotate, player, data}) => {
   const dispatch = useDispatch();
-
   const currentPlayerChance = useSelector(selectCurrentPlayerChance);
   const isDiceRolled = useSelector(selectDiceRolled);
   const diceNo = useSelector(selectDiceNo);
@@ -71,9 +69,10 @@ const Dice = ({color, rotate, player, data}) => {
 
   const handleDicePress = async predice => {
     const diceNumber = predice || Math.ceil(Math.random() * 6);
+    // const diceNumber = 3;
     playSound('dice_roll');
     setDiceRolling(true);
-    await delay(1800);
+    await delay(1300);
     dispatch(updateDiceNumber({diceNo: diceNumber}));
     setDiceRolling(false);
     const isAnyPieceAlive = data?.findIndex(e => e.pos !== 0 && e.pos !== 57);
@@ -118,37 +117,25 @@ const Dice = ({color, rotate, player, data}) => {
 
   return (
     <View style={[styles.flexRow, {transform: [{scaleX: rotate ? -1 : 1}]}]}>
-      <View style={styles.border1}>
-        <LinearGradient
-          style={styles.linearGradient}
-          colors={['#0052BE', '#5F9FCB', '#97C6C9']}
-          start={{x: 0, y: 0.5}}
-          end={{x: 1, y: 0.5}}>
-          <View style={styles.pileContainer}>
-            <Image source={pileIcon} style={styles.pileIcon} />
-          </View>
-        </LinearGradient>
+      <View style={[styles.border1, {backgroundColor: color}]}>
+        <View style={styles.pileContainer}>
+          <Image source={pileIcon} style={styles.pileIcon} />
+        </View>
       </View>
 
       <View style={styles.border2}>
-        <LinearGradient
-          style={styles.diceGradient}
-          colors={['#aac8ab', '#aac8ab', '#aac8ab']}
-          start={{x: 0, y: 0.5}}
-          end={{x: 1, y: 0.5}}>
-          <View style={styles.diceContainer}>
-            {currentPlayerChance === player && !diceRolling && (
-              <TouchableOpacity
-                disabled={isDiceRolled}
-                activeOpacity={0.5}
-                onPress={() => handleDicePress(0)}
-                //  Cheating move😂
-                onLongPress={() => handleDicePress(6)}>
-                <Image source={diceIcon} style={styles.diceIcon} />
-              </TouchableOpacity>
-            )}
-          </View>
-        </LinearGradient>
+        <View style={styles.diceContainer}>
+          {currentPlayerChance === player && !diceRolling && (
+            <TouchableOpacity
+              disabled={isDiceRolled || diceRolling}
+              activeOpacity={0.5}
+              onPress={() => handleDicePress(0)}
+              //  Cheating move😂
+              onLongPress={() => handleDicePress(6)}>
+              <Image source={diceIcon} style={styles.diceIcon} />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
 
       {diceRolling && (
@@ -180,19 +167,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   border1: {
+    padding: 1,
     borderWidth: 3,
     borderRightWidth: 0,
-    borderColor: '#f0ce2c',
+    borderColor: '#fff',
   },
   border2: {
     borderWidth: 3,
     padding: 1,
-    backgroundColor: '#aac8ab',
     borderRadius: 10,
     borderLeftWidth: 3,
-    borderColor: '#aac8ab',
   },
-  linearGradient: {},
   pileIcon: {
     width: 30,
     height: 30,
@@ -205,7 +190,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   diceContainer: {
-    backgroundColor: '#e8c0c1',
+    backgroundColor: '#d0d0d0',
+    borderColor: '#fff',
     borderWidth: 1,
     borderRadius: 5,
     width: 55,

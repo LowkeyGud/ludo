@@ -28,6 +28,8 @@ const checkWinningCriteria = pieces => {
 };
 
 export const handleForwardThunk = (playerNo, id, pos) => {
+  // 3 C1 27
+
   return async (dispatch, getState) => {
     const state = getState();
     const plottedPieces = selectCurrentPositions(state);
@@ -48,6 +50,7 @@ export const handleForwardThunk = (playerNo, id, pos) => {
     );
     let travelCount = beforePlayerPiece?.travelCount;
 
+    // for loop starts from 0 to diceNo - 1
     for (let i = 0; i < diceNo; i++) {
       const updatedPosition = getState();
       const playerPiece = updatedPosition.game[`player${playerNo}`].find(
@@ -74,8 +77,9 @@ export const handleForwardThunk = (playerNo, id, pos) => {
         }),
       );
       playSound('pile_move');
-      delay(5400);
+      await delay(100);
     }
+    // for loop ends here
 
     const updatedState = getState();
     const updatedPlottedPieces = selectCurrentPositions(updatedState);
@@ -85,19 +89,19 @@ export const handleForwardThunk = (playerNo, id, pos) => {
     const uniqueIDs = new Set(ids);
     const areDifferentIds = uniqueIDs.size > 1;
 
-    logic.log('finalPath', finalPath);
-    logic.log('ids', ids);
-    logic.log('uniqueIDs', uniqueIDs);
-    logic.log('areDifferentIds', areDifferentIds);
+    console.log('ids', ids);
+    console.log('uniqueIDs', uniqueIDs);
+    console.log('areDifferentIds', areDifferentIds);
 
     if (SafeSpots.includes(finalPath) || StarSpots.includes(finalPath)) {
       playSound('safe_spot');
     }
 
+    // if statement starts here
     if (
       areDifferentIds &&
-      !SafeSpots.includes(finalPath[0].pos) &&
-      !StarSpots.includes(finalPath[0].pos)
+      !SafeSpots.includes(finalPlot[0].pos) &&
+      !StarSpots.includes(finalPlot[0].pos)
     ) {
       const enemyPiece = finalPlot.find(p => p.id[0] !== id[0]);
       const enemyId = enemyPiece.id[0];
@@ -107,7 +111,7 @@ export const handleForwardThunk = (playerNo, id, pos) => {
       let backwordPath = startingPoints[no - 1];
       let i = enemyPiece.pos;
       playSound('collide');
-
+      // kill the enemy piece with backward movement to their base
       while (i !== backwordPath) {
         dispatch(
           updatePlayerPieceValue({
@@ -118,7 +122,7 @@ export const handleForwardThunk = (playerNo, id, pos) => {
           }),
         );
 
-        await delay(0.4);
+        await delay(0.001);
         i--;
         if (i === 0) {
           i = 52;
@@ -135,9 +139,10 @@ export const handleForwardThunk = (playerNo, id, pos) => {
       );
 
       dispatch(unfreezeDice());
+      return;
     }
+    // if statement ends here
 
-    // smae player gets second chance if he rolls 6 or reaches home
     if (diceNo == 6 || travelCount == 57) {
       dispatch(updatePlayerChance({chancePlayer: playerNo}));
 
@@ -157,8 +162,6 @@ export const handleForwardThunk = (playerNo, id, pos) => {
         return;
       }
     } else {
-      console.log(playerNo, 'chancePlayer');
-
       let chancePlayer = playerNo + 1;
       if (chancePlayer >= 5) {
         chancePlayer = 1;
