@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Animated, Image, StyleSheet} from 'react-native';
 import Logo from '../assets/images/logo.png';
 import Wrapper from '../components/Wrapper';
@@ -6,18 +6,21 @@ import {deviceHeight, deviceWidth} from '../constants/Scaling';
 import {prepareNavigation, resetAndNavigate} from '../helpers/NavigationUtil';
 
 const SplashScreen = () => {
-  const [isStop] = useState(false);
-  const scale = new Animated.Value(1);
+  const scale = useRef(new Animated.Value(1)).current;
+  const animation = useRef(null);
 
   useEffect(() => {
     prepareNavigation();
-    setTimeout(() => {
+
+    const timeout = setTimeout(() => {
       resetAndNavigate('HomeScreen');
     }, 1500);
+
+    return () => clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
-    const breathingAnimation = Animated.loop(
+    animation.current = Animated.loop(
       Animated.sequence([
         Animated.timing(scale, {
           toValue: 1.2,
@@ -32,13 +35,12 @@ const SplashScreen = () => {
       ]),
     );
 
-    if (!isStop) {
-      breathingAnimation.start();
-    }
+    animation.current.start();
+
     return () => {
-      breathingAnimation.stop();
+      animation.current?.stop();
     };
-  }, [isStop]);
+  }, []);
   return (
     <Wrapper>
       <Animated.View style={{transform: [{scale}]}}>

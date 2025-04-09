@@ -6,6 +6,7 @@ import {
   victoryStart,
 } from '../../helpers/PlotData';
 import {playSound} from '../../helpers/SoundUtility';
+import {delay} from '../../helpers/Utils';
 import {selectCurrentPositions, selectDiceNo} from './gameSelector';
 import {
   announceWinner,
@@ -16,9 +17,7 @@ import {
   updatePlayerPieceValue,
 } from './gameSlice';
 
-const delay = duration => new Promise(resolve => setTimeout(resolve, duration));
-
-const checkWinningCriteria = pieces => {
+export const checkWinningCriteria = pieces => {
   for (let piece of pieces) {
     if (piece.travelCount < 57) {
       return false;
@@ -39,6 +38,8 @@ export const handleForwardThunk = (playerNo, id, pos) => {
       playerNo === 1 ? 'A' : playerNo === 2 ? 'B' : playerNo === 3 ? 'C' : 'D';
 
     const peicesAtPosition = plottedPieces.filter(e => e.pos === pos);
+    console.log('peicesAtPosition', peicesAtPosition);
+
     const piece =
       peicesAtPosition[peicesAtPosition.findIndex(e => e.id[0] == alpha)];
 
@@ -57,13 +58,13 @@ export const handleForwardThunk = (playerNo, id, pos) => {
         e => e.id === id,
       );
       let path = playerPiece?.pos + 1;
+
       if (turningPoints.includes(path) && turningPoints[playerNo - 1] == path) {
         path = victoryStart[playerNo - 1];
       }
 
-      if (path == 53) {
-        path = 1;
-      }
+      // path = ((path - 1) % 52) + 1;
+      path = path > 52 ? 1 : path;
 
       finalPath = path;
       travelCount += 1;
@@ -81,17 +82,17 @@ export const handleForwardThunk = (playerNo, id, pos) => {
     }
     // for loop ends here
 
+    console.log('finalPath', finalPath);
+
     const updatedState = getState();
     const updatedPlottedPieces = selectCurrentPositions(updatedState);
     const finalPlot = updatedPlottedPieces.filter(e => e.pos == finalPath);
+    console.log('finalPlot', finalPlot);
+
     const ids = finalPlot.map(e => e.id[0]);
 
     const uniqueIDs = new Set(ids);
     const areDifferentIds = uniqueIDs.size > 1;
-
-    console.log('ids', ids);
-    console.log('uniqueIDs', uniqueIDs);
-    console.log('areDifferentIds', areDifferentIds);
 
     if (SafeSpots.includes(finalPath) || StarSpots.includes(finalPath)) {
       playSound('safe_spot');
@@ -103,6 +104,8 @@ export const handleForwardThunk = (playerNo, id, pos) => {
       !SafeSpots.includes(finalPlot[0].pos) &&
       !StarSpots.includes(finalPlot[0].pos)
     ) {
+      console.log('Here');
+
       const enemyPiece = finalPlot.find(p => p.id[0] !== id[0]);
       const enemyId = enemyPiece.id[0];
       let no =
@@ -123,10 +126,8 @@ export const handleForwardThunk = (playerNo, id, pos) => {
         );
 
         await delay(0.001);
-        i--;
-        if (i === 0) {
-          i = 52;
-        }
+        // i = ((i - 2 + 52) % 52) + 1; // Compact but hard to understand
+        i = i === 1 ? 52 : i - 1;
       }
 
       dispatch(
@@ -143,13 +144,19 @@ export const handleForwardThunk = (playerNo, id, pos) => {
     }
     // if statement ends here
 
+    console.log('travelCount', travelCount);
+
     if (diceNo == 6 || travelCount == 57) {
       dispatch(updatePlayerChance({chancePlayer: playerNo}));
 
       if (travelCount == 57) {
         playSound('home_win');
         const finalPlayerState = getState();
+        console.log('finalPlayerState', finalPlayerState);
+
         const playerAllPieces = finalPlayerState.game[`player${playerNo}`];
+
+        console.log('playerAllPieces', playerAllPieces);
 
         if (checkWinningCriteria(playerAllPieces)) {
           dispatch(announceWinner(playerNo));
@@ -162,10 +169,8 @@ export const handleForwardThunk = (playerNo, id, pos) => {
         return;
       }
     } else {
-      let chancePlayer = playerNo + 1;
-      if (chancePlayer >= 5) {
-        chancePlayer = 1;
-      }
+      let chancePlayer = (playerNo % 4) + 1;
+
       dispatch(updatePlayerChance({chancePlayer}));
     }
   };

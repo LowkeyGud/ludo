@@ -22,6 +22,7 @@ const MenuModal = ({visible, onPressHide}) => {
 
   return (
     <Modal
+      accessibilityLabel="menu-modal"
       style={styles.bottomModalView}
       visible={visible}
       backdropColor="black"

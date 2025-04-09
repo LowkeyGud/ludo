@@ -1,6 +1,5 @@
 import {useIsFocused} from '@react-navigation/native';
 import {fireEvent} from '@testing-library/react-native';
-import SoundPlayer from 'react-native-sound-player';
 import {navigate} from '../../src/helpers/NavigationUtil';
 import {playSound} from '../../src/helpers/SoundUtility';
 import HomeScreen from '../../src/screens/HomeScreen';
@@ -35,7 +34,7 @@ describe('HomeScreen', () => {
     const {getByText, queryByText, getByTestId, getByLabelText} =
       renderWithProviders(<HomeScreen />, {
         preloadedState: {
-          game: {currentPositions: null},
+          game: {currentPositions: []},
         },
       });
     expect(getByLabelText('Logo')).toBeTruthy();
@@ -50,7 +49,7 @@ describe('HomeScreen', () => {
     const {getByText} = renderWithProviders(<HomeScreen />, {
       preloadedState: {
         game: {
-          currentPositions: {},
+          currentPositions: [1, 2],
         },
       },
     });
@@ -70,7 +69,6 @@ describe('HomeScreen', () => {
     fireEvent.press(startButton);
     const state = store.getState();
     expect(state.game.currentPositions).toHaveLength(0); // Assuming resetGame sets it to null
-    expect(SoundPlayer.stop).toHaveBeenCalled();
     expect(navigate).toHaveBeenCalledWith('LudoBoardScreen');
     expect(playSound).toHaveBeenCalledWith('game_start');
   });
@@ -79,19 +77,22 @@ describe('HomeScreen', () => {
     const {getByText, store} = renderWithProviders(<HomeScreen />, {
       preloadedState: {
         game: {
-          currentPositions: {
-            hlala: 'lalala',
-          },
+          currentPositions: [
+            {
+              hlala: 'lalala',
+            },
+          ],
         },
       },
     });
     const resumeButton = getByText('RESUME');
     fireEvent.press(resumeButton);
     const state = store.getState();
-    expect(state.game.currentPositions).toEqual({
-      hlala: 'lalala',
-    });
-    expect(SoundPlayer.stop).toHaveBeenCalled();
+    expect(state.game.currentPositions).toEqual([
+      {
+        hlala: 'lalala',
+      },
+    ]);
     expect(navigate).toHaveBeenCalledWith('LudoBoardScreen');
     expect(playSound).toHaveBeenCalledWith('game_start');
   });
@@ -106,5 +107,10 @@ describe('HomeScreen', () => {
     useIsFocused.mockReturnValue(true);
     renderWithProviders(<HomeScreen />);
     expect(playSound).toHaveBeenCalledWith('home');
+  });
+  test('does not play sound when not focused', () => {
+    useIsFocused.mockReturnValue(false);
+    renderWithProviders(<HomeScreen />);
+    expect(playSound).not.toHaveBeenCalled();
   });
 });

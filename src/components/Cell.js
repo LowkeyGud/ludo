@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useMemo} from 'react';
+import {memo, useCallback, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -9,7 +9,7 @@ import {handleForwardThunk} from '../redux/reducers/gameActions';
 import {selectCurrentPositions} from '../redux/reducers/gameSelector';
 import Pile from './Pile';
 
-const Cell = ({id, cell, color, player}) => {
+const Cell = ({id, color}) => {
   const dispatch = useDispatch();
   const plotedPieces = useSelector(selectCurrentPositions);
 

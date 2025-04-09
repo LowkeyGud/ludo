@@ -72,8 +72,11 @@ const Dice = ({color, rotate, player, data}) => {
     // const diceNumber = 3;
     playSound('dice_roll');
     setDiceRolling(true);
+
+    console.log('1');
     await delay(1300);
     dispatch(updateDiceNumber({diceNo: diceNumber}));
+    console.log('2');
     setDiceRolling(false);
     const isAnyPieceAlive = data?.findIndex(e => e.pos !== 0 && e.pos !== 57);
     const isAnyPieceLocked = data?.findIndex(e => e.pos !== 0);
@@ -124,10 +127,11 @@ const Dice = ({color, rotate, player, data}) => {
       </View>
 
       <View style={styles.border2}>
-        <View style={styles.diceContainer}>
+        <View testID="dice-container" style={styles.diceContainer}>
           {currentPlayerChance === player && !diceRolling && (
             <TouchableOpacity
               disabled={isDiceRolled || diceRolling}
+              testID="dice-button"
               activeOpacity={0.5}
               onPress={() => handleDicePress(0)}
               //  Cheating move😂
@@ -140,6 +144,7 @@ const Dice = ({color, rotate, player, data}) => {
 
       {diceRolling && (
         <LottieView
+          accessibilityLabel="dice-animation"
           source={Diceroll}
           loop={false}
           autoPlay={true}
@@ -151,7 +156,11 @@ const Dice = ({color, rotate, player, data}) => {
 
       {currentPlayerChance === player && !isDiceRolled && (
         <Animated.View style={{transform: [{translateX: arrowAnimation}]}}>
-          <Image source={Arrow} style={{width: 50, height: 30}} />
+          <Image
+            accessibilityLabel="arrow"
+            source={Arrow}
+            style={{width: 50, height: 30}}
+          />
         </Animated.View>
       )}
     </View>

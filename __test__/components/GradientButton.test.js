@@ -2,15 +2,6 @@ import {fireEvent, render, screen} from '@testing-library/react-native';
 import GradientButton from '../../src/components/GradientButton';
 import {playSound} from '../../src/helpers/SoundUtility';
 
-// Mock dependencies
-// jest.mock('react-native-linear-gradient', () => {
-//   return ({children, testID, ...props}) => (
-//     <view testID={testID} {...props}>
-//       {children}
-//     </view>
-//   ); // Simple mock returning children
-// });
-
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => {
   // Return a mock component that passes through props
   return ({name, size, color, accessibilityLabel}) => (

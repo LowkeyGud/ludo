@@ -9,8 +9,9 @@ export const selectPlayer2 = state => state?.game?.player2;
 export const selectPlayer3 = state => state?.game?.player3;
 export const selectPlayer4 = state => state?.game?.player4;
 
-export const selectPocketPileSelection = state =>
+export const selectPocketPileSelectionPlayer = state =>
   state?.game?.pileSelectionPlayer;
-export const selectCellSelection = state => state?.game?.cellSelectionPlayer;
-export const selectDiceTouch = state => state?.game?.touchDiceBlock;
+export const selectCellSelectionPlayer = state =>
+  state?.game?.cellSelectionPlayer;
+export const selectDiceTouchBlock = state => state?.game?.diceTouchBlock;
 export const selectFireworks = state => state?.game?.fireworks;

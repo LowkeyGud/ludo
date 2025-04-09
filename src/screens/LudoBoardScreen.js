@@ -17,7 +17,7 @@ import {deviceHeight, deviceWidth} from '../constants/Scaling';
 import {Plot1Data, Plot2Data, Plot3Data, Plot4Data} from '../helpers/PlotData';
 import {playSound} from '../helpers/SoundUtility';
 import {
-  selectDiceTouch,
+  selectDiceTouchBlock,
   selectPlayer1,
   selectPlayer2,
   selectPlayer3,
@@ -29,7 +29,7 @@ const LudoBoardScreen = () => {
   const player2 = useSelector(selectPlayer2);
   const player3 = useSelector(selectPlayer3);
   const player4 = useSelector(selectPlayer4);
-  const isDiceTouch = useSelector(selectDiceTouch);
+  const isDiceTouch = useSelector(selectDiceTouchBlock);
   const winner = useSelector(state => state.game.winner);
 
   const isFocused = useIsFocused();
@@ -73,19 +73,25 @@ const LudoBoardScreen = () => {
   }, [isFocused]);
   return (
     <Wrapper>
-      <TouchableOpacity style={styles.menuIcon} onPress={handleMenuPress}>
+      <TouchableOpacity
+        accessibilityLabel="menu-icon"
+        style={styles.menuIcon}
+        onPress={handleMenuPress}>
         <IonIcons name="menu-outline" size={30} color="white" />
       </TouchableOpacity>
 
       <View style={styles.container}>
         <View
+          accessibilityLabel="dice-container-1"
           style={styles.flexRow}
           pointerEvents={isDiceTouch ? 'none' : 'auto'}>
           <Dice color={Colors.green} player={2} data={player2} />
           <Dice color={Colors.yellow} rotate player={3} data={player3} />
         </View>
 
-        <View style={styles.ludoBoardContainer}>
+        <View
+          accessibilityLabel="ludo-board-container"
+          style={styles.ludoBoardContainer}>
           <View style={styles.plotContainer}>
             <Pocket color={Colors.green} player={2} data={player2} />
             <VerticalPath cells={Plot2Data} color={Colors.yellow} player={2} />
@@ -111,6 +117,7 @@ const LudoBoardScreen = () => {
         </View>
 
         <View
+          accessibilityLabel="dice-container-2"
           style={styles.flexRow}
           pointerEvents={isDiceTouch ? 'none' : 'auto'}>
           <Dice color={Colors.red} player={1} data={player1} />
@@ -120,6 +127,7 @@ const LudoBoardScreen = () => {
 
       {showStartImage && (
         <Animated.Image
+          accessibilityLabel="start-image"
           source={Start}
           style={{
             width: deviceWidth * 0.5,
@@ -132,7 +140,9 @@ const LudoBoardScreen = () => {
       {menuVisible && (
         <MenuModal
           visible={menuVisible}
-          onPressHide={() => setMenuVisible(false)}
+          onPressHide={() => {
+            setMenuVisible(false);
+          }}
         />
       )}
 

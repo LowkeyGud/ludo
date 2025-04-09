@@ -1,16 +1,16 @@
 import {
-  selectCellSelection,
+  selectCellSelectionPlayer,
   selectCurrentPlayerChance,
   selectCurrentPositions,
   selectDiceNo,
   selectDiceRolled,
-  selectDiceTouch,
+  selectDiceTouchBlock,
   selectFireworks,
   selectPlayer1,
   selectPlayer2,
   selectPlayer3,
   selectPlayer4,
-  selectPocketPileSelection,
+  selectPocketPileSelectionPlayer,
 } from '../../../src/redux/reducers/gameSelector';
 
 describe('Game Selectors', () => {
@@ -27,7 +27,7 @@ describe('Game Selectors', () => {
       player4: {id: 4, score: 40},
       pileSelectionPlayer: 1,
       cellSelectionPlayer: 3,
-      touchDiceBlock: false,
+      diceTouchBlock: false,
       fireworks: true,
     },
   };
@@ -80,21 +80,21 @@ describe('Game Selectors', () => {
     });
   });
 
-  describe('selectPocketPileSelection', () => {
+  describe('selectPocketPileSelectionPlayer', () => {
     test('returns pileSelectionPlayer from state', () => {
-      expect(selectPocketPileSelection(mockState)).toBe(1);
+      expect(selectPocketPileSelectionPlayer(mockState)).toBe(1);
     });
   });
 
-  describe('selectCellSelection', () => {
+  describe('selectCellSelectionPlayer', () => {
     test('returns cellSelectionPlayer from state', () => {
-      expect(selectCellSelection(mockState)).toBe(3);
+      expect(selectCellSelectionPlayer(mockState)).toBe(3);
     });
   });
 
-  describe('selectDiceTouch', () => {
-    test('returns touchDiceBlock from state', () => {
-      expect(selectDiceTouch(mockState)).toBe(false);
+  describe('selectDiceTouchBlock', () => {
+    test('returns diceTouchBlock from state', () => {
+      expect(selectDiceTouchBlock(mockState)).toBe(false);
     });
   });
 
@@ -117,9 +117,9 @@ describe('Game Selectors', () => {
       expect(selectPlayer2(emptyState)).toBeUndefined();
       expect(selectPlayer3(emptyState)).toBeUndefined();
       expect(selectPlayer4(emptyState)).toBeUndefined();
-      expect(selectPocketPileSelection(emptyState)).toBeUndefined();
-      expect(selectCellSelection(emptyState)).toBeUndefined();
-      expect(selectDiceTouch(emptyState)).toBeUndefined();
+      expect(selectPocketPileSelectionPlayer(emptyState)).toBeUndefined();
+      expect(selectCellSelectionPlayer(emptyState)).toBeUndefined();
+      expect(selectDiceTouchBlock(emptyState)).toBeUndefined();
       expect(selectFireworks(emptyState)).toBeUndefined();
     });
   });

@@ -21,7 +21,6 @@ const HomeScreen = () => {
   const scaleAnim = useRef(new Animated.Value(-1)).current;
   const isFocused = useIsFocused();
 
-  console.log('This is from homescreen: ');
   useEffect(() => {
     const loopAnimation = () => {
       Animated.loop(
@@ -100,7 +99,7 @@ const HomeScreen = () => {
     <GradientButton title={title} onPress={onPress} />
   ));
 
-  const startNewGame = async (isNewGame = false) => {
+  const startNewGame = async isNewGame => {
     // SoundPlayer.stop();
 
     if (isNewGame) {

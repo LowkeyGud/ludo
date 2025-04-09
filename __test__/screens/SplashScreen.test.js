@@ -1,10 +1,12 @@
-import {render, waitFor} from '@testing-library/react-native';
+import {render} from '@testing-library/react-native';
 import React from 'react';
 import {
   prepareNavigation,
   resetAndNavigate,
 } from '../../src/helpers/NavigationUtil';
 import SplashScreen from '../../src/screens/SplashScreen';
+
+jest.useFakeTimers();
 
 // Mock the navigation functions
 jest.mock('../../src/helpers/NavigationUtil', () => ({
@@ -26,11 +28,9 @@ describe('SplashScreen', () => {
   it('should navigate to HomeScreen after 1.5 seconds', async () => {
     render(<SplashScreen />);
 
-    await waitFor(
-      () => {
-        expect(resetAndNavigate).toHaveBeenCalledWith('HomeScreen');
-      },
-      {timeout: 2000},
-    );
+    // ⏩ Fast-forward the timer
+    jest.advanceTimersByTime(1500);
+
+    expect(resetAndNavigate).toHaveBeenCalledWith('HomeScreen');
   });
 });

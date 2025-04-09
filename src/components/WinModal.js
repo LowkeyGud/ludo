@@ -5,9 +5,10 @@ import {useDispatch} from 'react-redux';
 import fireworkAnimation from '../assets/animation/firework.json';
 import girlAnimation from '../assets/animation/girl.json';
 import trophyAnimation from '../assets/animation/trophy.json';
+import {resetAndNavigate} from '../helpers/NavigationUtil';
 import {colorPlayer} from '../helpers/PlotData';
 import {playSound} from '../helpers/SoundUtility';
-import {resetGame} from '../redux/reducers/gameSlice';
+import {announceWinner, resetGame} from '../redux/reducers/gameSlice';
 import GradientButton from './GradientButton';
 import Pile from './Pile';
 
@@ -31,11 +32,12 @@ const WinModal = ({winner}) => {
   };
   return (
     <Modal
+      accessibilityLabel="win-modal"
       transparent={true}
       style={styles.modal}
       animationType="fade"
-      isVisible={visible}
-      onBackButtonPress={() => setVisible(false)}>
+      visible={visible}
+      onRequestClose={() => setVisible(false)}>
       <View style={styles.content}>
         <View style={styles.pileContainer}>
           <Pile player={1} color={colorPlayer[winner - 1]} />

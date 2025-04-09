@@ -12,16 +12,18 @@ import {useSelector} from 'react-redux';
 import {Colors} from '../constants/Colors';
 import {BackgroundImage} from '../helpers/GetIcons';
 import {
-  selectCellSelection,
+  selectCellSelectionPlayer,
   selectDiceNo,
-  selectPocketPileSelection,
+  selectPocketPileSelectionPlayer,
 } from '../redux/reducers/gameSelector';
 
 const Pile = ({color, player, cell, pieceId, onPress}) => {
   const PileIcon = BackgroundImage.GetImage(color);
   const rotation = useRef(new Animated.Value(0)).current;
-  const currentPlayerPileSelection = useSelector(selectPocketPileSelection);
-  const currentPlayerCellSelection = useSelector(selectCellSelection);
+  const currentPlayerPileSelection = useSelector(
+    selectPocketPileSelectionPlayer,
+  );
+  const currentPlayerCellSelection = useSelector(selectCellSelectionPlayer);
   const diceNo = useSelector(selectDiceNo);
   const playerPieces = useSelector(state => state.game[`player${player}`]); // [{id: 'D1', pos: 0, travelCount: 0},.....]
 
