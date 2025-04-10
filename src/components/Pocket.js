@@ -42,7 +42,9 @@ const Pocket = ({color, player, data}) => {
   }, []);
 
   return (
-    <View style={[styles.container, {backgroundColor: color}]}>
+    <View
+      accessibilityLabel="Pocket"
+      style={[styles.container, {backgroundColor: color}]}>
       <View style={styles.childFrame}>
         <View style={styles.flexRow}>
           <Plot
@@ -83,7 +85,9 @@ const Pocket = ({color, player, data}) => {
 
 const Plot = ({color, player, pieceNo, data, onPress}) => {
   return (
-    <View style={[styles.plot, {backgroundColor: color}]}>
+    <View
+      accessibilityLabel="Plot"
+      style={[styles.plot, {backgroundColor: color}]}>
       {data && data[pieceNo]?.pos === 0 && (
         <Pile
           color={color}

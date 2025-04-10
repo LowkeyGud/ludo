@@ -35,7 +35,7 @@ const PlayerPieces = memo(({player, style, pieceColor, translate}) => {
             <Pile
               cell={true}
               player={player}
-              onPress={() => null}
+              onPress={() => {}}
               pieceId={piece.id}
               color={pieceColor}
             />

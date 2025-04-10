@@ -11,7 +11,7 @@ import reducer, {
   updatePlayerChance,
   updatePlayerPieceValue,
 } from '../../../src/redux/reducers/gameSlice'; // Adjust path
-import {initialState} from '../../../src/redux/reducers/initialState';
+import { initialState } from '../../../src/redux/reducers/initialState';
 
 describe('gameSlice', () => {
   test('has correct name', () => {
@@ -186,7 +186,10 @@ describe('gameSlice', () => {
       expect(state.currentPositions).toEqual([]); // After setting pos to 0, it should be removed
     });
     it('should add the piece to currentPositions if the piece does not exist in currentPositions', () => {
-      const initialPieces = [{id: 1, pos: 0, travelCount: 0}];
+      const initialPieces = [
+        {id: 1, pos: 0, travelCount: 0},
+        {id: 2, pos: 0, travelCount: 0},
+      ]; // Initial pieces for player 1
 
       const newPieceData = {
         playerNo: 1,

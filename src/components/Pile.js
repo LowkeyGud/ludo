@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect, useMemo, useRef} from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   Animated,
   Easing,
@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Circle, Svg} from 'react-native-svg';
-import {useSelector} from 'react-redux';
-import {Colors} from '../constants/Colors';
-import {BackgroundImage} from '../helpers/GetIcons';
+import { Circle, Svg } from 'react-native-svg';
+import { useSelector } from 'react-redux';
+import { Colors } from '../constants/Colors';
+import { BackgroundImage } from '../helpers/GetIcons';
 import {
   selectCellSelectionPlayer,
   selectDiceNo,
@@ -38,7 +38,7 @@ const Pile = ({color, player, cell, pieceId, onPress}) => {
 
   const isForwardable = useCallback(() => {
     const piece = playerPieces?.find(item => item.id === pieceId);
-    return piece && piece.travelCount + diceNo <= 57;
+    return !!(piece && piece.travelCount + diceNo <= 57);
   }, [playerPieces, diceNo, pieceId]);
 
   useEffect(() => {
@@ -65,6 +65,7 @@ const Pile = ({color, player, cell, pieceId, onPress}) => {
 
   return (
     <TouchableOpacity
+      accessibilityLabel="Pile"
       style={styles.container}
       activeOpacity={0.6}
       disabled={!(cell ? isCellEnabled && isForwardable() : isPileEnabled)}
@@ -75,7 +76,9 @@ const Pile = ({color, player, cell, pieceId, onPress}) => {
           {borderColor: cell ? 'transparent' : Colors.borderColor},
         ]}>
         {(cell ? isCellEnabled && isForwardable() : isPileEnabled) && (
-          <View style={styles.dashedCircleContainer}>
+          <View
+            style={styles.dashedCircleContainer}
+            accessibilityLabel="Dashed Circle">
             <Animated.View
               style={[
                 styles.dashedCircle,

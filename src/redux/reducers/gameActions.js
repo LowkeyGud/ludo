@@ -38,7 +38,6 @@ export const handleForwardThunk = (playerNo, id, pos) => {
       playerNo === 1 ? 'A' : playerNo === 2 ? 'B' : playerNo === 3 ? 'C' : 'D';
 
     const peicesAtPosition = plottedPieces.filter(e => e.pos === pos);
-    console.log('peicesAtPosition', peicesAtPosition);
 
     const piece =
       peicesAtPosition[peicesAtPosition.findIndex(e => e.id[0] == alpha)];
@@ -82,12 +81,9 @@ export const handleForwardThunk = (playerNo, id, pos) => {
     }
     // for loop ends here
 
-    console.log('finalPath', finalPath);
-
     const updatedState = getState();
     const updatedPlottedPieces = selectCurrentPositions(updatedState);
     const finalPlot = updatedPlottedPieces.filter(e => e.pos == finalPath);
-    console.log('finalPlot', finalPlot);
 
     const ids = finalPlot.map(e => e.id[0]);
 
@@ -104,8 +100,6 @@ export const handleForwardThunk = (playerNo, id, pos) => {
       !SafeSpots.includes(finalPlot[0].pos) &&
       !StarSpots.includes(finalPlot[0].pos)
     ) {
-      console.log('Here');
-
       const enemyPiece = finalPlot.find(p => p.id[0] !== id[0]);
       const enemyId = enemyPiece.id[0];
       let no =
@@ -144,19 +138,14 @@ export const handleForwardThunk = (playerNo, id, pos) => {
     }
     // if statement ends here
 
-    console.log('travelCount', travelCount);
-
     if (diceNo == 6 || travelCount == 57) {
       dispatch(updatePlayerChance({chancePlayer: playerNo}));
 
       if (travelCount == 57) {
         playSound('home_win');
         const finalPlayerState = getState();
-        console.log('finalPlayerState', finalPlayerState);
 
         const playerAllPieces = finalPlayerState.game[`player${playerNo}`];
-
-        console.log('playerAllPieces', playerAllPieces);
 
         if (checkWinningCriteria(playerAllPieces)) {
           dispatch(announceWinner(playerNo));

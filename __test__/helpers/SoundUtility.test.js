@@ -13,10 +13,6 @@ describe('Sound Utilities', () => {
     jest.spyOn(console, 'log').mockImplementation(() => {});
   });
 
-  afterEach(() => {
-    console.log.mockRestore();
-  });
-
   describe('playSound', () => {
     test.each([
       'dice_roll',

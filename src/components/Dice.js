@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import React, {memo, useEffect, useRef, useState} from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import {
   Animated,
   Easing,
@@ -8,11 +8,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Diceroll from '../assets/animation/diceroll.json';
 import Arrow from '../assets/images/arrow.png';
-import {BackgroundImage} from '../helpers/GetIcons';
-import {playSound} from '../helpers/SoundUtility';
+import { BackgroundImage } from '../helpers/GetIcons';
+import { playSound } from '../helpers/SoundUtility';
+import { delay } from '../helpers/Utils';
 import {
   selectCurrentPlayerChance,
   selectDiceNo,
@@ -27,7 +28,7 @@ import {
 
 const Dice = ({color, rotate, player, data}) => {
   const dispatch = useDispatch();
-  const currentPlayerChance = useSelector(selectCurrentPlayerChance);
+  const currentPlayerChance = useSelector(selectCurrentPlayerChance) || 1;
   const isDiceRolled = useSelector(selectDiceRolled);
   const diceNo = useSelector(selectDiceNo);
   const playerPieces = useSelector(
@@ -64,31 +65,22 @@ const Dice = ({color, rotate, player, data}) => {
     animateArrow();
   }, [currentPlayerChance, isDiceRolled]);
 
-  const delay = duration =>
-    new Promise(resolve => setTimeout(resolve, duration));
-
   const handleDicePress = async predice => {
     const diceNumber = predice || Math.ceil(Math.random() * 6);
     // const diceNumber = 3;
     playSound('dice_roll');
     setDiceRolling(true);
 
-    console.log('1');
     await delay(1300);
     dispatch(updateDiceNumber({diceNo: diceNumber}));
-    console.log('2');
     setDiceRolling(false);
     const isAnyPieceAlive = data?.findIndex(e => e.pos !== 0 && e.pos !== 57);
     const isAnyPieceLocked = data?.findIndex(e => e.pos !== 0);
-
     if (isAnyPieceAlive == -1) {
       if (diceNumber === 6) {
         dispatch(enablePileSelection({playerNo: player}));
       } else {
-        let chancePlayer = player + 1;
-        if (chancePlayer > 4) {
-          chancePlayer = 1;
-        }
+        let chancePlayer = (player % 4) + 1;
         await delay(600);
         dispatch(updatePlayerChance({chancePlayer}));
       }
@@ -96,16 +88,13 @@ const Dice = ({color, rotate, player, data}) => {
       const canMove = playerPieces.some(
         pile => pile.travelCount + diceNumber <= 57 && pile.pos !== 0,
       );
-
       if (
         (!canMove && diceNumber === 6 && isAnyPieceLocked == -1) ||
         (!canMove && diceNumber !== 6 && isAnyPieceLocked != -1) ||
         (!canMove && diceNumber !== 6 && isAnyPieceLocked == -1)
       ) {
-        let chancePlayer = player + 1;
-        if (chancePlayer > 4) {
-          chancePlayer = 1;
-        }
+
+        let chancePlayer = (player % 4) + 1;
         await delay(600);
         dispatch(updatePlayerChance({chancePlayer}));
         return;

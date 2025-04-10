@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cell Component renders container with safe spot background when the id is in SafeSpots 1`] = `
+<View
+  style={
+    [
+      {
+        "alignItems": "center",
+        "borderColor": "grey",
+        "borderWidth": 0.5,
+        "height": "100%",
+        "justifyContent": "center",
+        "width": "100%",
+      },
+      {
+        "backgroundColor": "red",
+      },
+    ]
+  }
+/>
+`;

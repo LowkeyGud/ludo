@@ -81,8 +81,6 @@ describe('handleForwardThunk', () => {
       .map(args => args[0])
       .filter(action => action.type === 'updatePlayerPieceValue');
 
-    console.log(updateActions);
-
     expect(updateActions).toHaveLength(3);
     expect(updateActions[0].payload.travelCount).toBe(initialPos + 1);
     expect(updateActions[1].payload.travelCount).toBe(initialPos + 2);
@@ -137,8 +135,6 @@ describe('handleForwardThunk', () => {
           action.type === 'updatePlayerPieceValue' &&
           action.payload.playerNo === 'player2',
       );
-
-    console.log(dispatch.mock.calls.map(args => args[0]));
 
     expect(enemyUpdates).toContainEqual({
       type: 'updatePlayerPieceValue',

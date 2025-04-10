@@ -145,6 +145,10 @@ const HomeScreen = () => {
           />
         </Pressable>
       </Animated.View>
+
+      {/* <View style={styles.witchContainer}>
+        <Text style={styles.creditText}>Github: @lowkeygud</Text>
+      </View> */}
     </Wrapper>
   );
 };
@@ -168,13 +172,19 @@ const styles = StyleSheet.create({
   },
   witchContainer: {
     position: 'absolute',
-    top: '60%',
-    left: '24%',
+    bottom: '10%',
   },
   witch: {
     height: 250,
     width: 250,
     transform: [{rotate: '25deg'}],
+  },
+  creditText: {
+    fontSize: 16,
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 10,
+    fontWeight: 'bold',
   },
 });
 

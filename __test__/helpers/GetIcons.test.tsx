@@ -3,9 +3,9 @@ import {BackgroundImage} from '../../src/helpers/GetIcons';
 
 describe('BackgroundImage', () => {
   it('should return the correct image when name exists', () => {
-    expect(BackgroundImage.GetImage('1')).not.toBeNull();
-    expect(BackgroundImage.GetImage('2')).not.toBeNull();
-    expect(BackgroundImage.GetImage('3')).toEqual('mocked-image');
+    expect(BackgroundImage.GetImage(1)).not.toBeNull();
+    expect(BackgroundImage.GetImage(2)).not.toBeNull();
+    expect(BackgroundImage.GetImage(3)).toEqual('mocked-image');
     expect(BackgroundImage.GetImage(Colors.green)).not.toBeNull();
     expect(BackgroundImage.GetImage(Colors.red)).not.toBeNull();
     expect(BackgroundImage.GetImage(Colors.yellow)).not.toBeNull();
