@@ -9,21 +9,23 @@ Here are some visuals of the **Ludo Game** in action:
 ### Gameplay Screenshots
 
 <p align="center">
-    <img src="https://github.com/user-attachments/assets/e8a6c0de-c191-4a62-b9c6-eca0c1cd3ccb" alt="Image 1" width="200"><br>
-    <img src="https://github.com/user-attachments/assets/6bb1224a-488c-4a1f-acea-d1de7b65b85d" alt="Image 2" width="200"><br>
-    <img src="https://github.com/user-attachments/assets/09dfa5b8-b980-44af-a2a7-f3b2a7e2c218" alt="Image 3" width="200"><br>
-    <img src="https://github.com/user-attachments/assets/6be6852b-3b64-4701-8afa-1f8331f8fd23" alt="Image 4" width="200"><br>
-    <img src="https://github.com/user-attachments/assets/24e5e70c-6cad-431f-9f30-7035d584ccce" alt="Image 5" width="200"><br>
+    <img src="https://github.com/user-attachments/assets/e8a6c0de-c191-4a62-b9c6-eca0c1cd3ccb" alt="Image 1" width="150">
+    <img src="https://github.com/user-attachments/assets/6bb1224a-488c-4a1f-acea-d1de7b65b85d" alt="Image 2" width="150">
+    <img src="https://github.com/user-attachments/assets/09dfa5b8-b980-44af-a2a7-f3b2a7e2c218" alt="Image 3" width="150">
+    <img src="https://github.com/user-attachments/assets/6be6852b-3b64-4701-8afa-1f8331f8fd23" alt="Image 4" width="150">
+    <img src="https://github.com/user-attachments/assets/24e5e70c-6cad-431f-9f30-7035d584ccce" alt="Image 5" width="150">
 </p>
 
 ### Gameplay GIF
 
 - **Enemy Kill**:
+
   ![Enemy Kill Animation](https://github.com/user-attachments/assets/fc52c0ea-f566-4906-804c-3bcb9d3aa823)
 
 ### Test Results
 
 - **Unit Test Coverage**:
+
   ![Test Coverage](https://github.com/user-attachments/assets/22b055be-45af-470b-b3cd-37459882be3d)
 
 ---
@@ -45,6 +47,33 @@ For **iOS**, add this script to your `package.json` to install CocoaPods depende
 ```
 
 This will generate a `Podfile.lock` and install iOS-specific dependencies in the `ios/Pods/` directory.
+
+---
+
+## 🛠️ Major Packages and Technologies
+
+This project leverages the following major packages and technologies:
+
+| **Category**          | **Packages/Technologies**                                                                                    | **Description**                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
+| **Core Frameworks**   | [React Native](https://reactnative.dev), [React](https://reactjs.org)                                        | Mobile app framework and UI library.         |
+| **Navigation**        | [React Navigation](https://reactnavigation.org)                                                              | Navigation library.                          |
+|                       | `@react-navigation/native`, `@react-navigation/native-stack`                                                 | Core and stack navigation.                   |
+| **State Management**  | [Redux](https://redux.js.org), [Redux Toolkit](https://redux-toolkit.js.org)                                 | State management and simplified Redux setup. |
+|                       | [Redux Persist](https://github.com/rt2zz/redux-persist)                                                      | Persist and rehydrate Redux state.           |
+| **Animations**        | [Lottie React Native](https://github.com/lottie-react-native/lottie-react-native)                            | Lottie animations.                           |
+|                       | [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/)                               | Declarative animations.                      |
+|                       | [React Native SVG](https://github.com/react-native-svg/react-native-svg)                                     | SVG rendering.                               |
+|                       | [React Native Linear Gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient) | Linear gradient backgrounds.                 |
+| **UI Components**     | [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)                            | Customizable icons.                          |
+|                       | [React Native Modal](https://github.com/react-native-modal/react-native-modal)                               | Modal components.                            |
+|                       | [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context)                | Safe area handling.                          |
+| **Utilities**         | [React Native MMKV](https://github.com/mrousavy/react-native-mmkv)                                           | High-performance key-value storage.          |
+|                       | [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/)                     | Gesture handling.                            |
+|                       | [React Native Sound Player](https://github.com/johnsonsu/react-native-sound-player)                          | Audio playback.                              |
+| **Testing**           | [Jest](https://jestjs.io)                                                                                    | JavaScript testing framework.                |
+|                       | [Testing Library](https://testing-library.com/docs/react-native-testing-library/intro/)                      | React Native testing utilities.              |
+| **Development Tools** | [ESLint](https://eslint.org), [Prettier](https://prettier.io), [TypeScript](https://www.typescriptlang.org)  | Linting, formatting, and typed JavaScript.   |
 
 ---
 
